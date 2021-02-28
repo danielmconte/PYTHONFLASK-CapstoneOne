@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title%}{%endblock%}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+        <a href="/" class="navbar-brand mx-3">Museum of Mars</a>
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navigation">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="/mars/images/new">Images From Mars</a>   
+          <a class="nav-item nav-link" href="/mars/forecast">Weather Forecast</a>  
+          <a class="nav-item nav-link" href="/mars/images">Photo Album</a>     
+          <a class="nav-item nav-link" href="/mars/books">Bookshop</a>   
+           
+        </div>
+        </div>
+      </nav>
+    {% block content %} {% endblock %}
+    {%with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, msg in messages %}
+    <h4 class = "{{category}}">{{msg}}</h4>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</body>
+</html>

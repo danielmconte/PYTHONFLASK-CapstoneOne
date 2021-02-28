@@ -1,0 +1,33 @@
+{%extends 'base.html' %}
+{% block title%}Mars Image Form{%endblock%}
+{% block content %}
+    <h1>Special Exhibit: Images from Mars</h1>
+    <h4>Photos captured by Curiosity, Opportunity, Spirit, and Perseverance Rovers</h4>
+    
+    
+    {% if data %}
+        <img src={{data["photos"][1]["img_src"]}}>
+        <p id="earth_date"><em>Earth Date: {{data["photos"][1]["earth_date"]}}</em></p>
+         
+    {% else %}
+        <p><em>Select a rover and sol, and image will be here.</em></p>    
+    {% endif %}
+    <form method = "POST">
+        {{ form.hidden_tag() }}    
+        {% for field in form
+            if field.widget.input_type != 'hidden' %}
+            <p>
+                {{field.label}}
+                {{field}}
+    
+                {% for err in field.errors %}
+                {{err}}
+                {% endfor %}
+            </p>
+        {% endfor %}
+        <button>Submit</button>
+        {% if data %}
+            <button>Add To Album</button> 
+        {% endif %}
+    </form>
+{% endblock %}

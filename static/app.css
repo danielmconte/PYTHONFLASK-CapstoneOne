@@ -1,0 +1,26 @@
+h1 {
+    color: whitesmoke;
+}
+
+body {
+    background-color: navy;
+}
+
+img {
+    width: 300px;
+    margin: 10px;
+    border-radius: 20% 20%;;
+}
+
+p {
+    font-size: 25px;
+    color: whitesmoke;
+}
+
+.mars_form {
+    margin: 50px;
+}
+
+#earth_date{
+    font-size: 15px;
+}

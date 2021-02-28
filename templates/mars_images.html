@@ -1,0 +1,27 @@
+{%extends 'base.html' %}
+{% block title%}Rover Images Page{%endblock%}
+{% block content %}
+<h1>Photo Album</h1>
+
+<div class="container">
+    <div class="row justify-content-center">
+      
+       
+            
+            {% for p in photos%}
+            <div class="col-4">
+                <img src='{{p.urls}}' />
+                <h4>{{p.rover_name}}</h4>
+                <a href="/mars/images/{{ p.id }}">View</a>
+                <h6>Earth Date: {{p.earth_date}} Sol: {{p.sol}}</h6>
+                <form action="/delete/{{ p.id }}">
+                    <button>DELETE</button>
+                </form>
+                
+            </div>
+            {% endfor %}
+            <h6>{{photos}}</h6>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{%extends 'base.html' %}
+{% block title%}Mars Image Form{%endblock%}
+{% block content %}
+    <h1>Special Exhibit: Mars Forecast</h1>
+    <h4>Last Seven Days of Weather Measurements for Mars</h4>
+ 
+    {% for d in data["sol_keys"]%}
+    <p>Sol:{{d}}</p>
+    <h6>Raw data feed: {{data[d]}}</h6>
+    <p>First Measurement: {{data[d]['First_UTC']}}, Last Measurement: {{data[d]['Last_UTC']}}</p>
+    <p>Northern Season: {{data[d]['Northern_season']}}, Southern Season: {{data[d]['Southern_season']}}</p>
+    <p>Atmospheric Pressure: {{data[d]['PRE']['av']}} pascals</p>
+    <p>Month Ordinal: {{data[d]['Month_ordinal']}}</p>
+    <hr>
+    {% endfor %}
+{% endblock %}
