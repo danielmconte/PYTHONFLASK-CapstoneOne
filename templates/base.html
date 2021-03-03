@@ -18,18 +18,23 @@
           <a class="nav-item nav-link" href="/mars/images/new">Images From Mars</a>   
           <a class="nav-item nav-link" href="/mars/forecast">Weather Forecast</a>  
           <a class="nav-item nav-link" href="/mars/images">Photo Album</a>     
-          <a class="nav-item nav-link" href="/mars/books">Bookshop</a>   
+          <a class="nav-item nav-link" href="/mars/books">Bookshop</a>
+          {% if session['user_id'] %}
+          <a class="nav-item nav-link" href="/logout">Logout</a>  
+          {% else %}
+          <a class="nav-item nav-link" href="/login">Login</a>   
+          <a class="nav-item nav-link" href="/register">Sign Up</a> 
+          {% endif %}     
            
         </div>
         </div>
       </nav>
+      <div class="container" style="margin-top: 2em">
+        {% for category, msg in get_flashed_messages(with_categories=True)%}
+        <div class="alert alert-{{category}}">{{ msg }}</div>
+        {% endfor %}
+      </div>
     {% block content %} {% endblock %}
-    {%with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    {% for category, msg in messages %}
-    <h4 class = "{{category}}">{{msg}}</h4>
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
+
 </body>
 </html>

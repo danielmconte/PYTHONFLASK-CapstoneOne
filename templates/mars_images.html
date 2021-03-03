@@ -6,9 +6,10 @@
 <div class="container">
     <div class="row justify-content-center">
       
-       
+            <h3>All the pictures you save will be here.</h3>
             
             {% for p in photos%}
+            {% if p.user_id == session['user_id']%}
             <div class="col-4">
                 <img src='{{p.urls}}' />
                 <h4>{{p.rover_name}}</h4>
@@ -17,8 +18,8 @@
                 <form action="/delete/{{ p.id }}">
                     <button>DELETE</button>
                 </form>
-                
             </div>
+            {% endif %}
             {% endfor %}
             <h6>{{photos}}</h6>
     </div>

@@ -6,9 +6,16 @@
     
     
     {% if data %}
-        <img src={{data["photos"][1]["img_src"]}}>
+        <div class="container">
+        <div class="row justify-content-center">  
+        {% for num in range(0, 9)%}
+        <div class="col-4">
+        <img src={{data["photos"][num]["img_src"]}}>
         <p id="earth_date"><em>Earth Date: {{data["photos"][1]["earth_date"]}}</em></p>
-         
+        </div>
+        {% endfor %}
+        </div>  
+        </div>
     {% else %}
         <p><em>Select a rover and sol, and image will be here.</em></p>    
     {% endif %}
