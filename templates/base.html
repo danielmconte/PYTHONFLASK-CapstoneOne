@@ -9,16 +9,14 @@
 </head>
 <body>
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-        <a href="/" class="navbar-brand mx-3">Museum of Mars</a>
+        <a href="/" class="navbar-brand mx-3">Mars Image Viewer</a>
         <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navigation">
         <div class="navbar-nav">
-          <a class="nav-item nav-link" href="/mars/images/new">Images From Mars</a>   
-          <a class="nav-item nav-link" href="/mars/forecast">Weather Forecast</a>  
+          <a class="nav-item nav-link" href="/mars/images/new">Images From Mars</a>    
           <a class="nav-item nav-link" href="/mars/images">Photo Album</a>     
-          <a class="nav-item nav-link" href="/mars/books">Bookshop</a>
           {% if session['user_id'] %}
           <a class="nav-item nav-link" href="/logout">Logout</a>  
           {% else %}
