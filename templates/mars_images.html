@@ -1,7 +1,7 @@
 {%extends 'base.html' %}
 {% block title%}Rover Images Page{%endblock%}
 {% block content %}
-<h1>Photo Album</h1>
+<h1>{{user.username}}'s photo album</h1>
 
 <div class="container">
     <div class="row justify-content-center">
@@ -21,7 +21,6 @@
             </div>
             {% endif %}
             {% endfor %}
-            <h6>{{photos}}</h6>
     </div>
 </div>
 

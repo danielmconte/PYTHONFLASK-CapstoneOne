@@ -40,9 +40,10 @@ def landing_page():
 # Show list (album) of photos
 @app.route('/mars/images')
 def get_images():
+    user = User.query.get_or_404(session['user_id'])
     photos = Photo.query.all()
 
-    return render_template('mars_images.html', photos=photos)
+    return render_template('mars_images.html', photos=photos, user=user)
 
  
 @app.route('/mars/images/<int:id>')
@@ -60,35 +61,35 @@ def see_image():
         sol = form.sol.data
         res = requests.get(f"{API_BASE_URL_PHOTO}/{rover}/photos?sol={sol}&api_key={key}")
         data = res.json() 
-        album = form.album.data
-        
-        if album:
-            flash(album, "danger")
-     
-        # if album == True and "user_id" not in session: 
-        #     flash("Please login first!", "danger")
-        #     return render_template('mars_form.html', form=form, data=data)
-        # elif album == True:
-        # Uses check box to determine album save, but UI could be improved
-       
-        #     # new_photo = Photo(rover_name = rover, earth_date=data["photos"][1]["earth_date"], sol =sol, urls=data["photos"][1]["img_src"], user_id=session['user_id'])
-        #     # db.session.add(new_photo)
-        #     # db.session.commit()
-        return render_template('mars_form.html', form=form, album=album, data=data)
+
+        return render_template('mars_form.html', form=form, data=data)
     else:
         return render_template('mars_form.html', form=form )
 
 
-
+@app.route('/mars/images/adds', methods = ['POST'])
+def add_image():
+    form = AddPhotoForm()
+    rover = request.form["rover"]
+    earth_date = request.form["earth_date"]
+    sol = request.form["sol"]
+    checklist = request.form.getlist('mycheckbox')
+    for url in checklist:
+        new_photo = Photo(rover_name = rover, earth_date=earth_date, sol =sol, urls=url, user_id=session['user_id'])
+        db.session.add(new_photo)
+        db.session.commit()   
+    return render_template('mars_form.html', form=form)  
+  
 
 @app.route('/delete/<int:id>', methods = ['GET'])
 def delete_image(id):
     # Made this a GET rather than DELETE because DELETE would not work, not great
+    user = User.query.get_or_404(session['user_id'])
     photo = Photo.query.get_or_404(id)
     db.session.delete(photo)
     db.session.commit()
     photos = Photo.query.all()
-    return render_template('mars_images.html', photos=photos)
+    return render_template('mars_images.html', photos=photos, user=user)
 
 
 @app.route('/register', methods=['GET', 'POST'])

@@ -7,7 +7,7 @@ class AddPhotoForm(FlaskForm):
 
     rover = SelectField("Rover", choices=[('curiosity', 'Curiosity'), ('spirit','Spirit'), ('insight', 'Insight'), ('perseverance', 'Perseverance')], validators=[InputRequired()])
     sol= IntegerField("Sol", validators=[InputRequired()])
-    album = BooleanField("Save to Album")
+
 
 
 class UserForm(FlaskForm):
