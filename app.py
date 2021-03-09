@@ -2,7 +2,7 @@ from flask import Flask, request, render_template, redirect, flash, session
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, Photo, User
 from secrets import API_SECRET_KEY
-from forms import AddPhotoForm, UserForm, AddParticularPhotoForm
+from forms import AddPhotoForm, UserForm
 from sqlalchemy.exc import IntegrityError
 import requests
 
@@ -61,6 +61,9 @@ def see_image():
         res = requests.get(f"{API_BASE_URL_PHOTO}/{rover}/photos?sol={sol}&api_key={key}")
         data = res.json() 
         album = form.album.data
+        
+        if album:
+            flash(album, "danger")
      
         # if album == True and "user_id" not in session: 
         #     flash("Please login first!", "danger")

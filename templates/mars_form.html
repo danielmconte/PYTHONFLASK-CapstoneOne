@@ -7,23 +7,24 @@
  
     {% if data %}
         {{album}}
-        {% for d in data["photos"] %}
-        <h3> {{d["id"]}} </h3>
-        {% endfor %}
+        {% if not data["photos"][0] %}
+            <p>Sorry no data from that Sol. Please try another date.</p>
+        {% else %}  
+
         <div class="container">
-        <div class="row justify-content-center">     
-        {% for num in range(0, 9)%}
-        <div class="col-4">
-        <img src={{data["photos"][num]["img_src"]}}>
-        <p>{{data["photos"][num]["id"]}}</p>
+            <div class="row justify-content-center">  
       
-        <p class="d-inline" id="earth_date"><em>Earth Date: {{data["photos"][1]["earth_date"]}}</em></p>
-        <form method="POST">
-            <input type = "text" name = "image" value = {{data["photos"][num]["id"]}} />
-            {{ form.hidden_tag() }}    
-            {% for field in form
-                if field.widget.input_type != 'hidden' %}
-                <p>
+            {% for num in range(0, 9)%}
+            <div class="col-4">
+                <img src={{data["photos"][num]["img_src"]}}>
+                <p>{{data["photos"][num]["id"]}}</p>
+                <p class="d-inline" id="earth_date"><em>Earth Date: {{data["photos"][1]["earth_date"]}}</em></p>
+                <form method="POST">
+                <input type = "text" name = "image" value = {{data["photos"][num]["id"]}} />
+                {{ form.hidden_tag() }}    
+                {% for field in form
+                    if field.widget.input_type != 'hidden' %}
+                    <p>
                     {% if field.type == "BooleanField" %}
                         {{field.label}}
                         {{field}}
@@ -33,16 +34,19 @@
                     {% for err in field.errors %}
                     {{err}}
                     {% endfor %}
-                </p>
-            {% endfor %}  
-        </form>
+                    </p>
+                {% endfor %}  
+                </form>
+            </div>
+            {% endfor %}
+            </div>  
+            {% endif %}
         </div>
-        {% endfor %}
-        </div>  
-        </div>
-    {% else %}
-        <p><em>Select a rover and sol, and image will be here.</em></p>    
-    {% endif %}
+        {% else %}
+            <p><em>Select a rover and sol, and image will be here.</em></p>    
+        {% endif %}
+
+
     <form method = "POST">
         {{ form.hidden_tag() }}    
         {% for field in form

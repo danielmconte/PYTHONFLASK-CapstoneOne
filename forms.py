@@ -15,7 +15,7 @@ class UserForm(FlaskForm):
     password= PasswordField("Password", validators=[InputRequired()])
 
 
-class AddParticularPhotoForm(FlaskForm):
+
 
     
 
