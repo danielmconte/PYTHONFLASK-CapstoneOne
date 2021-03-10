@@ -1,6 +1,6 @@
 # PYTHONFLASK-CapstoneOne
 
-## A site that makes external API calls to the NASA Rover API allowing user to find photos for all the days of the particular rover mission.
+## A site that makes external API calls to the NASA Rover API allowing user to find photos for all the days of a particular rover voyage.
 ## If a user registers and logs in they can save photos to a personal photo album. 
 
 ### Uses Python and Flack backend.  Other libraries used: SqlAlchemy, WTForms, Jinja, Bootstrap  
