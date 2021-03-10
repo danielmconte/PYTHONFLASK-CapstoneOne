@@ -1,23 +1,42 @@
 {%extends 'base.html' %}
 {% block title%}Rover Images Page{%endblock%}
 {% block content %}
-<h1>{{user.username}}'s photo album</h1>
+
+{% if user %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <h1 class="text text-info">{{user.username}}'s photo album</h1>
+                {% if photos[0] not in photos%} 
+                <h3 class="display-6">All the pictures you save will be here.</h3> 
+                {% else %}
+                <h3 class="display-6">All the pictures you saved are here.</h3> 
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% else %}
+    <h1 class="display-5">Photo Album</h1>
+    <h3 class="display-6">All the pictures you save will be here.</h3> 
+{% endif %}
 
 <div class="container">
     <div class="row justify-content-center">
       
-            <h3>All the pictures you save will be here.</h3>
             
             {% for p in photos%}
             {% if p.user_id == session['user_id']%}
-            <div class="col-4">
-                <img src='{{p.urls}}' />
-                <h4>{{p.rover_name}}</h4>
-                <a href="/mars/images/{{ p.id }}">View</a>
-                <h6>Earth Date: {{p.earth_date}} Sol: {{p.sol}}</h6>
-                <form action="/delete/{{ p.id }}">
-                    <button>DELETE</button>
+            <div class="col-4 my-3">
+                <img class="img-fluid img_thumbnail" src='{{p.urls}}' />
+                <div class="d-block">
+                <form class="d-inline" action="/mars/images/{{ p.id }}">
+                    <button class="btn btn-secondary">VIEW</button>
                 </form>
+                <form class="d-inline" action="/delete/{{ p.id }}">
+                    <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                </form>
+                </div>
+               
             </div>
             {% endif %}
             {% endfor %}

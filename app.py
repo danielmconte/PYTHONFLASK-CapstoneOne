@@ -40,7 +40,10 @@ def landing_page():
 # Show list (album) of photos
 @app.route('/mars/images')
 def get_images():
-    user = User.query.get_or_404(session['user_id'])
+    if "user_id" in session:
+        user = User.query.get_or_404(session['user_id'])
+    else:
+        user=None
     photos = Photo.query.all()
 
     return render_template('mars_images.html', photos=photos, user=user)
@@ -70,14 +73,18 @@ def see_image():
 @app.route('/mars/images/adds', methods = ['POST'])
 def add_image():
     form = AddPhotoForm()
-    rover = request.form["rover"]
-    earth_date = request.form["earth_date"]
-    sol = request.form["sol"]
-    checklist = request.form.getlist('mycheckbox')
-    for url in checklist:
-        new_photo = Photo(rover_name = rover, earth_date=earth_date, sol =sol, urls=url, user_id=session['user_id'])
-        db.session.add(new_photo)
-        db.session.commit()   
+    if "user_id" not in session:
+       flash('Pleased Login First!', 'danger') 
+    else:
+        rover = request.form["rover"]
+        earth_date = request.form["earth_date"]
+        sol = request.form["sol"]
+        checklist = request.form.getlist('mycheckbox')
+        for url in checklist:
+            new_photo = Photo(rover_name = rover, earth_date=earth_date, sol =sol, urls=url, user_id=session['user_id'])
+            db.session.add(new_photo)
+            db.session.commit()   
+        flash('Images saved!', 'success') 
     return render_template('mars_form.html', form=form)  
   
 

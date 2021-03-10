@@ -2,8 +2,51 @@
 {% block title%}Mars Landing Page{%endblock%}
 {% block content %}
 
-    <h1>WELCOME TO THE VIRTUAL MUSEUM OF MARS</h1>
-
-   
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-10">
+    <h1 class="display-2">WELCOME TO MARS IMAGE VIEWER</h1>
+    <h3>CELEBRATING THE IMAGES OF THE NASA MARS ROVERS</h3>
+        </div>
+    </div>
+    <div id="carouselControls" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="https://mars.nasa.gov/mars2020-raw-images/pub/ods/surface/sol/00010/ids/edr/browse/ncam/NLF_0010_0667835353_914ECM_N0030000NCAM00130_01_295J01_1200.jpg" class="d-block h-150 w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="https://mars.nasa.gov/mars2020-raw-images/pub/ods/surface/sol/00011/ids/fdr/browse/zcam/ZRF_0011_0667929945_064FDR_N0030000ZCAM00015_034085J01_1200.jpg" class="d-block h-50 w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="https://mars.nasa.gov/mars2020-raw-images/pub/ods/surface/sol/00002/ids/edr/browse/edl/EDF_0002_0667110754_028ECV_N0010052EDLC00002_0010LUJ01_1200.jpg" class="d-block h-200 w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="http://mars.jpl.nasa.gov/msl-raw-images/msss/00013/mcam/0013ML0000020100100168E01_DXXX.jpg" class="d-block h-50 w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="https://mars.nasa.gov/mars2020-raw-images/pub/ods/surface/sol/00001/ids/edr/browse/edl/EUF_0001_0667022676_631ECV_N0010052EDLC00001_0010LUJ01_1200.jpg" class="d-block h-100 w-100" alt="...">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselControls"  data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselControls"  data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <p>1. Login/Signup</p>
+                <p>2. Find Photos from Mars Rovers</p>
+                <p>3. Save the photos you like</p>
+                <p>4. View and Delete your photos in your album.</p>
+            </div>
+        </div>
+    </div>
+  
 
 {% endblock %}

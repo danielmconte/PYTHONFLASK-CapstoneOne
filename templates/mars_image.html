@@ -2,16 +2,24 @@
 {% block title%}Mars Image{%endblock%}
 {% block content %}
 
-<h1>Mars Image</h1>
-<img src='{{photo.urls}}'/>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-8">
+        <h1 class="display-6 text-info">Sol: {{photo.sol}}, Earth Date: {{photo.earth_date}}, via {{photo.rover_name}}</h1>
+        
+        <img class="view_image border border-info border-5" src='{{photo.urls}}'/>  
+  
+        <form action="/mars/images">
+            <button class="btn btn-secondary">Back to Album</button>
+        </form>
+        </div>
+    </div>
+</div>
 
 
 
-<form action="/mars/images">
-    <button>Cancel</button>
-</form>
 
-<p>{{photo}}</p>
+
 
 
 

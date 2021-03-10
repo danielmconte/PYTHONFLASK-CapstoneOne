@@ -1,13 +1,13 @@
 {%extends 'base.html' %}
 {% block title%}Mars Image Form{%endblock%}
 {% block content %}
-    <h1>Images from Mars</h1>
-    <h4>Photos captured by Curiosity, Opportunity, Spirit, and Perseverance Rovers</h4>
-    
+
+   
+  
  
     {% if data %}
-        {% if not data["photos"][0] %}
-            <p>Sorry no data from that Sol. Please try another date.</p>
+        {% if not data["photos"] %}
+            <p class="text text-danger">Sorry no data from that Sol. Please try another date.</p>
         {% else %}  
         <form action="/mars/images/adds" method="POST">
             <div class="container">
@@ -16,37 +16,74 @@
                 <input type = "hidden" name = "rover" value = {{data["photos"][1]["rover"]["name"]}} />
                 <input type = "hidden" name = "sol" value = {{data["photos"][1]["sol"]}} />
                 {% for num in range(0, 9)%}
+              
+                {% if not data["photos"][num] %}
+                
+                {% else %}
                 <div class="col-4">
-                    <img src={{data["photos"][num]["img_src"]}}>
-                    <p>{{data["photos"][num]["id"]}}</p>
-                    <p class="d-inline" id="earth_date"><em>Earth Date: {{data["photos"][1]["earth_date"]}}</em></p>
-                    <input type = "checkbox" value={{data["photos"][num]["img_src"]}} name="mycheckbox" />
+                    <img class="img_response my-3" src={{data["photos"][num]["img_src"]}}>
+                    <input  type = "checkbox" value={{data["photos"][num]["img_src"]}} name="mycheckbox" />
+                    <h6 class="d-inline">Add</h6>
                 </div>
+                {% endif %}
                 {% endfor %}
-                <button>Add Selected Photos</button>
+                <button class="btn btn-secondary my-5">Add Selected Photos</button>
                 </div>  
             </div>
         </form>
         {% endif %}
         {% else %}
-            <p><em>Select a rover and sol, and image will be here.</em></p>    
+        <div class="container">
+        <div class =" row justify-content-end">
+            <p class="display-6 my-5"><em>Select a rover and sol, and images will be here.</em></p>    
+        </div>
+        </div>
     {% endif %}
 
 
-    <form method = "POST">
-        {{ form.hidden_tag() }}    
-        {% for field in form
-            if field.widget.input_type != 'hidden' %}
-            <p>
-                    {{field.label}}
-                    {{field}}
-            
-    
-                {% for err in field.errors %}
-                {{err}}
-                {% endfor %}
-            </p>
-        {% endfor %}
-        <button>Submit</button>
-    </form>
+
+    <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-6 border border-info shadow rounded p-3">
+            <div class="form-group">
+                <form method = "POST">
+                    {{ form.hidden_tag() }}    
+                    {% for field in form
+                        if field.widget.input_type != 'hidden' %}
+                        <p>
+                                {{field.label}}
+                                {{field}}
+                        
+                
+                            {% for err in field.errors %}
+                            {{err}}
+                            {% endfor %}
+                        </p>
+                    {% endfor %}
+                    <button class="btn btn-secondary mt-3">Submit</button>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+ 
+    <div class="container my-5">
+        <div class="row justify-content-center">
+          <div class="col-6">
+            <div class="alert alert-danger">
+                <div class="row">
+                        <h5 class="text-danger">Tips for Searching</h5>
+                        
+                        <h6 class="text-secondary">Perseverance has just landed so try low numbers!</h6>
+                        <h6 class="text-secondary">Insight's data is spotty. Keep going little guy!</h6>
+                        
+                </div>
+            </div>  
+            </div>
+        </div>
+    </div>
+
+
+
 {% endblock %}
